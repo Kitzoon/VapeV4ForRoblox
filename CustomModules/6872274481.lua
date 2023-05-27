@@ -1,5 +1,3 @@
-print("cigar client loaded!")
-
 local GuiLibrary = shared.GuiLibrary
 local playersService = game:GetService("Players")
 local textService = game:GetService("TextService")
@@ -10615,3 +10613,5 @@ task.spawn(function()
 		end)
 	end)
 end)
+
+warningNotification("Cigar Client", "LOADED DA PACK", 5)
