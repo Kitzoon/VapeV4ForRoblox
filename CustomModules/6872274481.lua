@@ -98,7 +98,7 @@ end
 
 local function vapeGithubRequest(scripturl)
 	if not isfile("vape/"..scripturl) then
-		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/Kitzoon/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		assert(suc, res)
 		assert(res ~= "404: Not Found", res)
 		if scripturl:find(".lua") then res = "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..res end
@@ -4930,16 +4930,35 @@ end)
 
 local Scaffold = {Enabled = false}
 runFunction(function()
-	local scaffoldtext = Instance.new("TextLabel")
-	scaffoldtext.Font = Enum.Font.SourceSans
-	scaffoldtext.TextSize = 20
-	scaffoldtext.BackgroundTransparency = 1
-	scaffoldtext.TextColor3 = Color3.fromRGB(255, 0, 0)
-	scaffoldtext.Size = UDim2.new(0, 0, 0, 0)
-	scaffoldtext.Position = UDim2.new(0.5, 0, 0.5, 30)
-	scaffoldtext.Text = "0"
-	scaffoldtext.Visible = false
-	scaffoldtext.Parent = GuiLibrary.MainGui
+    local scaffoldFrame = Instance.new("Frame")
+    scaffoldFrame.BackgroundColor3 = Color3.new(0.172549, 0.172549, 0.172549)
+    scaffoldFrame.BorderSizePixel = 0
+    scaffoldFrame.Position = UDim2.new(0.473958343, 0, 0.727777779, 0)
+    scaffoldFrame.Size = UDim2.new(0, 100, 0, 100)
+    scaffoldFrame.Visible = false
+    scaffoldFrame.Parent = GuiLibrary.MainGui
+
+    local uicorner = Instance.new("UICorner")
+    uicorner.Parent = scaffoldFrame
+
+    local uistroke = Instance.new("UIStroke")
+    uistroke.Parent = scaffoldFrame
+
+    local scaffoldtext = Instance.new("TextLabel")
+    scaffoldtext.Font = Enum.Font.SourceSans
+    scaffoldtext.Text = "0"
+    scaffoldtext.TextColor3 = Color3.new(1, 1, 1)
+    scaffoldtext.TextScaled = true
+    scaffoldtext.TextSize = 1
+    scaffoldtext.TextWrapped = true
+    scaffoldtext.BackgroundColor3 = Color3.new(1, 1, 1)
+    scaffoldtext.BackgroundTransparency = 1
+    scaffoldtext.Position = UDim2.new(0.100000001, 0, 0.134545907, 0)
+    scaffoldtext.Size = UDim2.new(0.789999902, 0, 0.71090883, 0)
+    scaffoldtext.Visible = true
+    scaffoldtext.Name = "ScaffoldText"
+    scaffoldtext.Parent = scaffoldFrame
+
 	local ScaffoldExpand = {Value = 1}
 	local ScaffoldDiagonal = {Enabled = false}
 	local ScaffoldTower = {Enabled = false}
@@ -5001,7 +5020,7 @@ runFunction(function()
 		Name = "Scaffold",
 		Function = function(callback)
 			if callback then
-				scaffoldtext.Visible = ScaffoldBlockCount.Enabled
+				scaffoldFrame.Visible = ScaffoldBlockCount.Enabled
 				if entityLibrary.isAlive then 
 					scaffoldstopmotionpos = entityLibrary.character.HumanoidRootPart.CFrame.p
 				end
@@ -5066,7 +5085,7 @@ runFunction(function()
 					until (not Scaffold.Enabled)
 				end)
 			else
-				scaffoldtext.Visible = false
+				scaffoldFrame.Visible = false
 				oldpos = Vector3.zero
 				oldpos2 = Vector3.zero
 			end
@@ -5118,7 +5137,7 @@ runFunction(function()
 		Name = "Block Count",
 		Function = function(callback) 
 			if Scaffold.Enabled then
-				scaffoldtext.Visible = callback 
+				scaffoldFrame.Visible = callback 
 			end
 		end,
 		HoverText = "Shows the amount of blocks in the middle."
@@ -10580,20 +10599,20 @@ task.spawn(function()
 		pcall(function()
 			if not isfile("vape/Profiles/bedwarsdata.txt") then 
 				local commit = "main"
-				for i,v in pairs(game:HttpGet("https://github.com/7GrandDadPGN/VapeV4ForRoblox"):split("\n")) do 
+				for i,v in pairs(game:HttpGet("https://github.com/Kitzoon/VapeV4ForRoblox"):split("\n")) do 
 					if v:find("commit") and v:find("fragment") then 
 						local str = v:split("/")[5]
 						commit = str:sub(0, str:find('"') - 1)
 						break
 					end
 				end
-				writefile("vape/Profiles/bedwarsdata.txt", game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..commit.."/CustomModules/bedwarsdata", true))
+				writefile("vape/Profiles/bedwarsdata.txt", game:HttpGet("https://raw.githubusercontent.com/Kitzoon/VapeV4ForRoblox/"..commit.."/CustomModules/bedwarsdata", true))
 			end
 			local olddata = readfile("vape/Profiles/bedwarsdata.txt")
 
 			repeat
 				local commit = "main"
-				for i,v in pairs(game:HttpGet("https://github.com/7GrandDadPGN/VapeV4ForRoblox"):split("\n")) do 
+				for i,v in pairs(game:HttpGet("https://github.com/Kitzoon/VapeV4ForRoblox"):split("\n")) do 
 					if v:find("commit") and v:find("fragment") then 
 						local str = v:split("/")[5]
 						commit = str:sub(0, str:find('"') - 1)
@@ -10601,7 +10620,7 @@ task.spawn(function()
 					end
 				end
 				
-				local newdata = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..commit.."/CustomModules/bedwarsdata", true)
+				local newdata = game:HttpGet("https://raw.githubusercontent.com/Kitzoon/VapeV4ForRoblox/"..commit.."/CustomModules/bedwarsdata", true)
 				if newdata ~= olddata then 
 					rundata(game:GetService("HttpService"):JSONDecode(newdata), game:GetService("HttpService"):JSONDecode(olddata))
 					olddata = newdata
@@ -10613,5 +10632,3 @@ task.spawn(function()
 		end)
 	end)
 end)
-
-warningNotification("Cigar Client", "LOADED DA PACK", 5)
