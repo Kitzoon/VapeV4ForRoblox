@@ -1,3 +1,5 @@
+print("cigar client loaded!")
+
 local GuiLibrary = shared.GuiLibrary
 local playersService = game:GetService("Players")
 local textService = game:GetService("TextService")
